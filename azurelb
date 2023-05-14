@@ -9,5 +9,8 @@ resource "azurerm_lb" "this" {
   location            = var.location
   sku                 = "Standard"
   tags = local.lb_tags
-
- 
+ dynamic "frontend_ip_configuration" {
+    for_each = each.value.ip_configuration
+    content {
+      name                          = frontend_ip_configuration.value.name
+   
