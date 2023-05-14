@@ -14,3 +14,12 @@ resource "azurerm_lb" "this" {
     content {
       name                          = frontend_ip_configuration.value.name
    
+   subnet_id                     = lookup(frontend_ip_configuration.value, "subnet_id", "") == "" ? null : frontend_ip_configuration.value.subnet_id
+      private_ip_address            = lookup(frontend_ip_configuration.value, "private_ip_address", null) == null ? null : frontend_ip_configuration.value.private_ip_address
+      private_ip_address_allocation = lookup(frontend_ip_configuration.value, "private_ip_address_allocation", null) == null ? null : frontend_ip_configuration.value.private_ip_address_allocation
+      private_ip_address_version    = lookup(frontend_ip_configuration.value, "private_ip_address_version", null) == null ? null : frontend_ip_configuration.value.private_ip_address_version
+      public_ip_address_id          = lookup(frontend_ip_configuration.value, "public_ip_address_id", null) == null ? null : frontend_ip_configuration.value.public_ip_address_id
+    }
+  }
+}
+ 
