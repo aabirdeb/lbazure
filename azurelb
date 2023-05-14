@@ -1,0 +1,13 @@
+
+resource "azurerm_lb" "this" {
+  for_each = var.loadbalancers
+  //for_each = { for app in var.loadbalancers :
+  //lb.name => lb
+  //}
+  name                = format("%s-%s", local.lbname, each.key)
+  resource_group_name = var.resource_group_name
+  location            = var.location
+  sku                 = "Standard"
+  tags = local.lb_tags
+
+ 
