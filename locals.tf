@@ -100,3 +100,15 @@ locals {
 
 
   
+env_tags = {
+    "role"        = var.role
+    "rg_name"     = var.resource_group_name
+    "environment" = var.environment
+    "owner"       = var.owner
+    "vendor"      = var.vendor
+    "application" = var.client_name
+    "creator"     = var.creator
+  }
+  lb_tags = "${merge(local.env_tags, var.tags)}"
+
+}
