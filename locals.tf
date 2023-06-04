@@ -82,3 +82,21 @@ locals {
   ])
 
 
+
+  lb_dimension = flatten([
+    for lb_key, lb in var.loadbalancers : [
+      for alert in lb.lbalert : [
+        for dimension in alert.dimensions : {
+          lb_name            = lb_key
+          alert_name         = alert.name
+          alert_actiongroup  = alert.actiongroup
+          dimension_name     = dimension.name
+          dimension_operator = dimension.operator
+          dimension_values   = dimension.values
+        }
+      ]
+    ]
+  ])
+
+
+  
